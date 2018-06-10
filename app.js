@@ -14,7 +14,7 @@ app.get('/index.htm', function (req, res) {
     res.sendFile(__dirname + "/" + "index.htm");
 })
 
-//get
+//get process
 app.get('/process_get', function (req, res) {
     response = {
         firstName: req.query.firstName,
