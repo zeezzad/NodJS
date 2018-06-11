@@ -48,4 +48,5 @@ var server = app.listen(8081, function () {
     var port = server.address().port
 
     console.log("Example app listen  att http://%s:%s", host, port);
-})
+    console.log("localhost:8081");
+});
