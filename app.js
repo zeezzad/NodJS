@@ -22,12 +22,12 @@ app.get('/index.htm', function (req, res) {
 
     con.connect(function (err) {
         if(err) throw err;
-        con.query("",function (err,result,fields) {
+        con.query("SELECT * FROM",function (err,result,fields) {
             if(err) throw err;
             console.log(result);
         })
     })
-    
+
 })
 
 
