@@ -9,26 +9,37 @@ var upload = multer({ dest: 'tmp/' });
 app.use(express.static('public'));
 var urlcodedParser = bodyParser.urlencoded({ extended: false });
 
-var con = mysql.createConnection({
-host : "localhost",
-user : "root",
-password : "12345678",
-database : "jobreq"
+var connection = mysql.createConnection({
+connectionLimit: 50,    
+host : 'localhost',
+user : 'root',
+password : '',
+database : 'jobreg'
 });
 
-//index
-app.get('/index.htm', function (req, res) {
-    res.sendFile(__dirname + "/" + "index.htm");
-
-    con.connect(function (err) {
-        if(err) throw err;
-        con.query("SELECT * FROM",function (err,result,fields) {
-            if(err) throw err;
-            console.log(result);
-        })
-    })
+connection.connect(function (error) {
+    
+  if(!!error){
+     console.log(error);
+  }else{
+      console.log('connected');
+  }
 
 })
+
+//index
+app.get('/', function (req, res) {
+    res.sendFile(__dirname + "/" + "index.htm");
+    
+    connection.query("SELECT * FROM user",function (error, rows, fields) {
+        if(!!error){
+           console.log('query error');
+        }else{
+            console.log(rows);
+            
+        }
+    });
+});
 
 
 //get process
